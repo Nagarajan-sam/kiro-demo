@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Run Python Unit Tests",
+      "trigger": "PostFileSave",
+      "description": "Automatically run the pytest unit test suite whenever app.py is created, modified, or saved, and report any failures without masking them.",
+      "matcher": "app\\.py$",
+      "action": {
+        "type": "agent",
+        "prompt": "A Python application file matching `app.py` was just created, modified, or saved. Run the project's unit test suite and report the results accurately.\n\nFollow these steps exactly:\n\n1. Confirm the change is to a relevant Python application file (`app.py`).\n2. Verify pytest is available before running it. Check the project's dependency setup (e.g. `requirements.txt`, `pyproject.toml`, the active virtualenv). Run the test suite with:\n\n       python -m pytest -q\n\n3. Inspect BOTH the command's standard output AND its exit status.\n   - Exit status 0 = the test run succeeded.\n   - Any non-zero exit status = failure (test failures, collection errors, or errors).\n\n4. If any test fails or errors:\n   - Report the names of the failing/erroring tests (node IDs, e.g. `tests/test_routes.py::test_index`).\n   - Include the relevant error messages, assertion details, and tracebacks.\n   - Clearly state that the test run FAILED.\n\n5. Do NOT claim the tests passed unless `python -m pytest -q` exited with status 0.\n\n6. Do NOT silently ignore or swallow test failures — always surface them.\n\n7. Do NOT modify test files merely to make them pass. If a test fails, investigate the underlying cause (application code or a genuine test defect) and explain it; only change a test if you have identified and explained a real defect in the test itself.\n\n8. If pytest is NOT installed / not available, report the missing dependency explicitly and stop. Do NOT install packages automatically — instead tell the user pytest is missing and point them to the project's dependency setup (`requirements.txt`).\n\nSummarize the outcome concisely: whether tests passed or failed, and if failed, the failing test names and error details."
+      }
+    }
+  ]
+}
