@@ -1,0 +1,177 @@
+:root {
+  --bg: #f5f6f8;
+  --card: #ffffff;
+  --text: #1f2430;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --complete: #16a34a;
+  --delete: #dc2626;
+  --border: #e5e7eb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.container {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+
+/* Flash / validation messages */
+.flashes {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.flash {
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+}
+
+/* Cards */
+.add-task,
+.task-list {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.field {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.25rem;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  font: inherit;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--primary);
+}
+.btn-complete {
+  background: var(--complete);
+}
+.btn-delete {
+  background: var(--delete);
+}
+
+/* Task list */
+.tasks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task__title {
+  font-weight: 600;
+}
+
+.task__desc {
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.task__status {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.task--done .task__title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.task--done .task__status {
+  color: var(--complete);
+}
+
+.task__actions {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.task__actions form {
+  margin: 0;
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+/* Responsive: stack actions under the task on narrow screens */
+@media (max-width: 420px) {
+  .task {
+    flex-direction: column;
+  }
+  .task__actions {
+    width: 100%;
+  }
+  .btn {
+    flex: 1;
+  }
+}
